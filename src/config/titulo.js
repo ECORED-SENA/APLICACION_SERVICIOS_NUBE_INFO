@@ -1,1 +1,2 @@
-module.exports = 'Técnico en programación de aplicaciones y servicios para la nube'
+module.exports =
+  'Técnico en programación de aplicaciones y servicios para la nube'
