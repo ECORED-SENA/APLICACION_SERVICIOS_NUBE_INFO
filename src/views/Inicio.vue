@@ -180,7 +180,21 @@ section
     .titulo__template--a.mb-4
       span.h4 7. Créditos
 
-    Creditos
+    .creditos
+      div(
+        v-for="(creditoKey, index) of Object.keys(creditosData)"
+        :class="index != Object.keys(creditosData).length -1 ? 'mb-4' : ''" 
+      )
+        .creditos__titulo {{configTitulos[creditoKey]}}
+        table
+          tbody
+            tr(
+              v-for="(item, idx) of creditosData[creditoKey]" 
+              :key="creditoKey+idx"
+            )
+              td.text-bold(colspan='2' v-html="renderText(item.nombre)")
+              td(colspan='2' v-html="renderText(item.cargo)")
+              td(colspan='3' v-html="renderText(item.centro)")
 
   Footer
 
@@ -188,8 +202,38 @@ section
 <script>
 export default {
   name: 'Inicio',
-  data: () => ({}),
+  data: () => ({
+    configTitulos: {
+      liderEquipo: 'ECOSISTEMA DE RECURSOS EDUCATIVOS DIGITALES',
+      contenidoInstruccional: 'CONTENIDO INSTRUCCIONAL',
+      desarrolloProducto:
+        'DISEÑO Y DESARROLLO DE RECURSOS EDUCATIVOS DIGITALES',
+      gestoresRepositorio: 'GESTORES DE REPOSITORIO',
+    },
+  }),
+  computed: {
+    creditosData() {
+      return this.$config.creditos
+    },
+  },
+  methods: {
+    renderText(textObj) {
+      let newText = ''
+      if (Array.isArray(textObj)) {
+        textObj.forEach((texto, index) => {
+          newText += (index ? '<br/>' : '') + texto
+        })
+      } else {
+        newText += textObj
+      }
+      return newText
+    },
+  },
 }
 </script>
 
-<style lang="sass"></style>
+<style lang="sass">
+.creditos
+  td, th
+    border-color: $color-sistema-c
+</style>
