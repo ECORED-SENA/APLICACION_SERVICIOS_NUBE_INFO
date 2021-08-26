@@ -37,7 +37,7 @@ export default {
 
 .banner-principal
   *
-    color: $color-banner-text !important
+    color: #12263f !important
   .tarjeta
     background-color: $color-banner-fondo
     background-size: cover
